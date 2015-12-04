@@ -10,6 +10,13 @@
 #import <SharedFileList/LSSharedFileList.h>
 #import "sidebar.h"
 
+void printUsage(){
+	printf("Usage: sidebartool list\n\
+Usage: sidebartool remove \"value\"\tSidebar Item Title, ie. \"Air Drop\"\
+\n");
+	
+}
+
 int main(int argc, const char * argv[]) {
 	@autoreleasepool {
 		//variable init
@@ -33,12 +40,9 @@ int main(int argc, const char * argv[]) {
 						formattedOutput = [NSString stringWithFormat:@"%@ not found\n",arguments[2]];
 						printf("%s",[formattedOutput cStringUsingEncoding:[NSString defaultCStringEncoding]]);
 					};
-				}
+				} else printUsage();
 			}
-		} else {
-			//print help
-		}
-		
+		} else printUsage();
 	}
     return 0;
 }
