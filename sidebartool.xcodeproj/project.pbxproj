@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1752F5131C0CDE2200018A84 /* sidebar.m in Sources */ = {isa = PBXBuildFile; fileRef = 1752F5121C0CDE2200018A84 /* sidebar.m */; settings = {ASSET_TAGS = (); }; };
 		17BEA26B1C07B051008BB755 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17BEA26A1C07B051008BB755 /* main.m */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +24,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1752F5111C0CDE2200018A84 /* sidebar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sidebar.h; sourceTree = "<group>"; };
+		1752F5121C0CDE2200018A84 /* sidebar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sidebar.m; sourceTree = "<group>"; };
 		17BEA2671C07B051008BB755 /* sidebartool */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = sidebartool; sourceTree = BUILT_PRODUCTS_DIR; };
 		17BEA26A1C07B051008BB755 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				17BEA26A1C07B051008BB755 /* main.m */,
+				1752F5111C0CDE2200018A84 /* sidebar.h */,
+				1752F5121C0CDE2200018A84 /* sidebar.m */,
 			);
 			path = sidebartool;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1752F5131C0CDE2200018A84 /* sidebar.m in Sources */,
 				17BEA26B1C07B051008BB755 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,6 +211,10 @@
 		17BEA26F1C07B051008BB755 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/Frameworks/CoreServices.framework/Versions/A/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -212,6 +222,10 @@
 		17BEA2701C07B051008BB755 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/Frameworks/CoreServices.framework/Versions/A/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -235,6 +249,7 @@
 				17BEA2701C07B051008BB755 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
