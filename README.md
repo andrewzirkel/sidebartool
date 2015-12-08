@@ -1,7 +1,9 @@
 # Sidebartool
-A command line tool to managed the Finder Sidebar
+A command line tool to manage the Finder Sidebar
 
 This is quick and dirty and a work in progress.
+
+Requires OSX 10.11
 
 #Build
 Clone the repository.<br />
