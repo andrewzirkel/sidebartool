@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <SharedFileList/LSSharedFileList.h>
 
+
 @interface sidebar : NSObject
 
 - (id)init;
 - (void)dealloc;
 - (NSMutableDictionary *)getSidebarItems;
+- (BOOL)addSidebarItem:(NSString *) item
+							Position:(float) position;
 - (BOOL)removeSidebarItem:(NSString *) itemToDelete;
 
 @end

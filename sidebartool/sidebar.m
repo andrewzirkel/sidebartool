@@ -36,14 +36,40 @@
 	
 	for (id item in sidebarSnapShot) {
 		NSString *itemName = (__bridge NSString *)(LSSharedFileListItemCopyDisplayName((__bridge LSSharedFileListItemRef)(item)));
-		if ([specialItems containsObject:itemName]){
-			itemList[itemName]=@"";
-		} else {
+//		if ([specialItems containsObject:itemName]){
+//			itemList[itemName]=@"";
+//		} else {
 			LSSharedFileListItemResolve((__bridge LSSharedFileListItemRef)(item),0,(CFURLRef*) &itemPath,Nil);
 			itemList[itemName]=[(__bridge NSURL *)itemPath path];
-		}
+//		}
 	}
 	return itemList;
+}
+
+- (BOOL)addSidebarItem:(NSString *) item
+							Position:(float) position{
+	//check for special urls:
+	//All My Files:
+	if ([item caseInsensitiveCompare:@"All My Files"]==0) {
+		item = @"file://localhost/System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch";
+		NSURL *itemToAdd = [NSURL URLWithString:[item stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+		LSSharedFileListInsertItemURL(sidebarItems, kLSSharedFileListItemBeforeFirst, Nil, nil, (__bridge CFURLRef)itemToAdd, nil, nil);
+		return true;
+	}
+	//set up base url
+	NSString *pathPrefix = [@"file://localhost" stringByAppendingString:NSHomeDirectory()];
+	if (item!=nil) {
+		item = [[pathPrefix stringByAppendingString:@"/"] stringByAppendingString:item];
+	} else item = pathPrefix;
+	//check if path exists
+	NSURL *itemToAdd = [NSURL URLWithString:[item stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+	NSError *err;
+	if ([itemToAdd checkResourceIsReachableAndReturnError:&err]) {
+		LSSharedFileListInsertItemURL(sidebarItems, kLSSharedFileListItemBeforeFirst, Nil, nil, (__bridge CFURLRef)itemToAdd, nil, nil);
+		return TRUE;
+	}else {
+		return false;
+	}
 }
 
 - (BOOL)removeSidebarItem:(NSString *) itemToDelete {
