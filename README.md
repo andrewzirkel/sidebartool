@@ -9,4 +9,5 @@ Use `xcodebuild install` on command line in Project directory to build.
 
 #Usage
 Usage: sidebartool list<br />
-Usage: sidebartool remove "value"&nbsp;&nbsp;&nbsp;&nbsp;Sidebar Item Title, ie. "Air Drop"
+Usage: sidebartool remove "item"&nbsp;&nbsp;&nbsp;&nbsp;Sidebar Item Title, ie. "Air Drop"<br />
+Usage: sidebartool add "item"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;User homedir for Users Home Directory or Folder Name, ie. Music
