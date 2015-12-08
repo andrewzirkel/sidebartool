@@ -50,7 +50,7 @@
 							Position:(float) position{
 	//check for special urls:
 	//All My Files:
-	if ([item caseInsensitiveCompare:@"All My Files"]==0) {
+	if (item && [item caseInsensitiveCompare:@"All My Files"]==0) {
 		item = @"file://localhost/System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch";
 		NSURL *itemToAdd = [NSURL URLWithString:[item stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
 		LSSharedFileListInsertItemURL(sidebarItems, kLSSharedFileListItemBeforeFirst, Nil, nil, (__bridge CFURLRef)itemToAdd, nil, nil);
@@ -61,8 +61,9 @@
 	if (item!=nil) {
 		item = [[pathPrefix stringByAppendingString:@"/"] stringByAppendingString:item];
 	} else item = pathPrefix;
-	//check if path exists
+	//build url
 	NSURL *itemToAdd = [NSURL URLWithString:[item stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+	//check if path exists
 	NSError *err;
 	if ([itemToAdd checkResourceIsReachableAndReturnError:&err]) {
 		LSSharedFileListInsertItemURL(sidebarItems, kLSSharedFileListItemBeforeFirst, Nil, nil, (__bridge CFURLRef)itemToAdd, nil, nil);
