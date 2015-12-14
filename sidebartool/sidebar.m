@@ -10,14 +10,12 @@
 
 @implementation sidebar {
 	NSArray *sidebarSnapShot;
-	NSArray *specialItems;
 	LSSharedFileListRef *sidebarItems;
 }
 
 - (id)init{
 	self = [super init];
 	if (self) {
-		specialItems=@[@"domain-AirDrop", @"All My Files", @"iCloud"];
 		//get sidebar snapshot
 		sidebarItems = LSSharedFileListCreate(Nil,kLSSharedFileListFavoriteItems,Nil);
 		sidebarSnapShot = (__bridge NSArray *)(LSSharedFileListCopySnapshot(sidebarItems, Nil));
@@ -36,12 +34,8 @@
 	
 	for (id item in sidebarSnapShot) {
 		NSString *itemName = (__bridge NSString *)(LSSharedFileListItemCopyDisplayName((__bridge LSSharedFileListItemRef)(item)));
-//		if ([specialItems containsObject:itemName]){
-//			itemList[itemName]=@"";
-//		} else {
-			LSSharedFileListItemResolve((__bridge LSSharedFileListItemRef)(item),0,(CFURLRef*) &itemPath,Nil);
-			itemList[itemName]=[(__bridge NSURL *)itemPath path];
-//		}
+		LSSharedFileListItemResolve((__bridge LSSharedFileListItemRef)(item),0,(CFURLRef*) &itemPath,Nil);
+		itemList[itemName]= ([(__bridge NSURL *)itemPath path] != nil) ? [(__bridge NSURL *)itemPath path] : @"";
 	}
 	return itemList;
 }
@@ -49,6 +43,15 @@
 - (BOOL)addSidebarItem:(NSString *) item
 							Position:(float) position{
 	//check for special urls:
+	/* Needs display name and correct icon
+	//iCloud
+	if (item && [item caseInsensitiveCompare:@"iCloud"]==0) {
+		item=@"x-apple-finder:icloud";
+		NSURL *itemToAdd = [NSURL URLWithString:[item stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+		LSSharedFileListInsertItemURL(sidebarItems, kLSSharedFileListItemBeforeFirst, (__bridge CFStringRef)@"iCloud Drive", nil, (__bridge CFURLRef)itemToAdd, nil, nil);
+		return true;
+	}
+	*/
 	//All My Files:
 	if (item && [item caseInsensitiveCompare:@"All My Files"]==0) {
 		item = @"file://localhost/System/Library/CoreServices/Finder.app/Contents/Resources/MyLibraries/myDocuments.cannedSearch";
